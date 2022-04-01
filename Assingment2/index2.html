@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 2 - Website Building</title>
+        <style>
+            body {
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+
+            #login-container {
+                width: 460px;
+                margin: 0 auto;
+            }
+
+            form label,
+            form input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            form input {
+                padding: 8px;
+            }
+
+            form label {
+                font-weight: bold;
+            }
+
+            form div {
+                margin: 16px 0px;
+            }
+
+        /* Css added*/
+
+            .icon-inside{
+                position: relative;
+            }
+
+            .icon-inside span{
+                position: absolute;
+                right: 0;
+                top:10px;
+                padding:10px 10px;
+            }
+        </style>
+
+        <link href=https://fonts.googleapis.com/icon?family=Material+Icons rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div id="login-container">
+
+            <form>
+                <div class="icon-inside" id="div-user">
+                    <label for="username">Username:</label>
+                    <input id="username" type="text">
+                </div>
+
+                <div class="icon-inside" id="div-pass">
+                    <label for="password">Password:</label>
+                    <input id="password" type="password">
+                    
+                </div>
+
+                <input type="submit" value="Login">
+                
+            </form>
+
+        </div>
+
+        <script>
+
+            // Global variabels
+            var username = "new_user"
+            var password = 123456789
+
+            var myForm = document.getElementById('login-container')
+            var myUser = document.getElementById('username')
+            var myPass = document.getElementById('password')
+
+
+            //Validation username
+
+            var divUser = document.getElementById('div-user')
+            var spanElemUser = document.createElement('span')
+            spanElemUser.classList.add('material-icons')
+            divUser.appendChild(spanElemUser)
+
+
+                function formValidationUser(){
+
+                    if(myUser.value == username){
+
+                        myUser.style.border = "2px green solid"
+
+                        spanElemUser.innerText='done'
+
+                        spanElemUser.style.color = 'green'
+                
+                    }
+
+                    else if(myUser.value !== username || myUser.value == null){
+                        
+                        myUser.style.border = "2px red solid"
+
+                        spanElemUser.innerText='close'
+
+                        spanElemUser.style.color = 'red'
+                    
+                    }
+
+                }
+
+            //Validation password
+
+            var divPass = document.getElementById('div-pass')
+            var spanElemPass = document.createElement('span')
+            spanElemPass.classList.add('material-icons')
+            divPass.appendChild(spanElemPass)
+
+                function formValidationPass(){
+
+                    if(myPass.value == password){
+
+                        myPass.style.border = "2px green solid"
+
+                        spanElemPass.innerText='done'
+
+                        spanElemPass.style.color ='green'
+                    }
+
+                    else if(myPass.value !== password || myPass.value == null){
+
+                        myPass.style.border = "2px solid red"
+
+                         spanElemPass.innerText = 'close'
+
+                        spanElemPass.style.color = 'red'
+                    }
+
+                }
+
+
+            // Adding message
+                
+            var createP = document.createElement('p')
+            createP.innerText = '* please, enter a  username \n * please, enter a password'
+            myForm.appendChild(createP)
+
+
+            function dispalyMessage(){
+
+
+                if(myUser.value == username && myPass.value == password){
+
+                createP.innerText ='Successful login!'
+                }
+
+                else if(myPass.value == password && myUser.value !== username){
+
+                    createP.innerText = '*please, enter a valid username'
+                }
+                
+                else if(myUser.value == username && myPass.value !== password){
+
+                    createP.innerText = '*please, enter a valid password'
+
+                }
+
+                else if(myUser.value !== username || myUser.value == "" && myPass.value !== password || myPass.value == ""){
+
+                    createP.innerText='*please, enter a valid username \n *please, enter a valid password'
+                }
+            
+            }
+                
+            //Prevent Default & calling functions
+
+                myForm.addEventListener('submit',function(e){
+
+                    e.preventDefault();
+                    formValidationUser()
+                    formValidationPass()
+                    dispalyMessage()
+                })
+
+        </script>
+    </body>
+</html>
